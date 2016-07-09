@@ -1,0 +1,93 @@
+{% load cms_tags menu_tags sekizai_tags static i18n %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>
+            {% block title %}
+                {% page_attribute "page_title" %} - {{ request.site.name }}
+            {% endblock title %}
+        </title>
+        <meta name="description" content="{% page_attribute 'meta_description' %}">
+        <meta name="author" content="">
+
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% render_block "css" %}
+
+        {% block css %}
+          <link href="{% static "css/design.css" %}" rel="stylesheet">
+        {% endblock %}
+
+    </head>
+    <body>
+        {% cms_toolbar %}
+        <nav>
+            <div class="nav-wrapper">
+                <div class="container">
+                    <div class="col s12">
+                        <a href="#!" class="brand-logo">Logo</a>
+                        <a href="#" data-activates="nav-mobile" class="button-collapse">
+                            <i class="material-icons">menu</i>
+                        </a>
+                        <ul class="right hide-on-med-and-down">
+                            {% show_menu 0 100 100 100 %}
+                        </ul>
+                        <ul id="nav-mobile" class="side-nav">
+                            {% show_menu 0 100 100 100 %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container main-wrapper">
+
+            {% block content %}{% endblock content %}
+
+        </main>
+
+        <footer class="page-footer">
+            <div class="row">
+                <div class="col l3 s6">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l3 s6">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l3 s6">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l3 s6">
+                    <h5 class="white-text">Footer Content 2</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="row">
+                    <div class="col s12">
+                    Copyright &copy; {{ request.site.name }} {% now "Y" %}
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        {% block js %}
+          <script src="{% static "js/dist/vendors.min.js" %}"></script>
+          <script src="{% static "js/dist/bundle.app.min.js" %}"></script>
+        {% endblock js%}
+        {% render_block "js" %}
+    </body>
+</html>

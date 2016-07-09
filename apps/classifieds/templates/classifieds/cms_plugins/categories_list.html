@@ -1,0 +1,24 @@
+{% load jfutags %}
+<div class="row categories_plugin">
+    <div class="card-panel">
+    {% for root in roots %}
+        <div class="col s12 m6 l3">
+            <ul class="collection with-header">
+                <li class="collection-header light-green lighten-1">
+                    <i class="material-icons circle">{{ root.icon }}</i>
+                    <span class="title white-text">{{ root.name }}</span>
+                </li>
+                {% for child in root.get_children %}
+                    <li class="collection-item">
+                        <a href="#!">
+                            {{ child.name }}
+                            <span class="badge {{ child.badge_color }}">{{ child.count }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    {% jfu  %}
+    </div>
+</div>

@@ -1,0 +1,9 @@
+node_modules
+media/*
+static/*
+dovanojam/static/bower_components
+__pycache__
+*.pyc
+.sass-cache
+.DS_Store
+.idea

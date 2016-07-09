@@ -1,0 +1,66 @@
+[
+  {
+    "model": "classifieds.Category",
+    "pk": 1,
+    "fields": {
+      "path": "0001",
+      "depth": 1,
+      "numchild": 1,
+      "name": "Kids",
+      "slug": "kids",
+      "icon": "info_outline",
+      "icon_type": "materialize",
+      "badge_color": "red",
+      "created": "2016-07-08 17:42:57.835815+02",
+      "modified": "2016-07-08 17:42:57.835815+02"
+    }
+  },
+  {
+    "model": "classifieds.Category",
+    "pk": 2,
+    "fields": {
+      "path": "0002",
+      "depth": 1,
+      "numchild": 1,
+      "name": "Home",
+      "slug": "home",
+      "icon": "info_outline",
+      "icon_type": "materialize",
+      "badge_color": "red",
+      "created": "2016-07-08 17:42:57.835815+02",
+      "modified": "2016-07-08 17:42:57.835815+02"
+    }
+  },
+  {
+    "model": "classifieds.Category",
+    "pk": 3,
+    "fields": {
+      "path": "00010001",
+      "depth": 2,
+      "numchild": 0,
+      "name": "Toys",
+      "slug": "toys",
+      "icon": "info_outline",
+      "icon_type": "materialize",
+      "badge_color": "red",
+      "created": "2016-07-08 17:42:57.835815+02",
+      "modified": "2016-07-08 17:42:57.835815+02"
+    }
+  },
+  {
+    "model": "classifieds.Category",
+    "pk": 4,
+    "fields": {
+      "path": "00020001",
+      "depth": 2,
+      "numchild": 0,
+      "name": "Clothes",
+      "slug": "clothes",
+      "icon": "info_outline",
+      "icon_type": "materialize",
+      "badge_color": "red",
+      "created": "2016-07-08 17:42:57.835815+02",
+      "modified": "2016-07-08 17:42:57.835815+02"
+    }
+  }
+]

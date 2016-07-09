@@ -1,0 +1,23 @@
+{
+  "name": "dovanojam_lt",
+  "description": "Dovanojam.lt Unneeded Things Donations Project based on django-cms",
+  "main": "",
+  "authors": [
+    "Aurimas Navickas"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.6",
+    "jquery": "^2.2.0",
+    "blueimp-file-upload": "^9.12.5"
+  }
+}

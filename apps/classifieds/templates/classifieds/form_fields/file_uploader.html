@@ -1,0 +1,181 @@
+{% load sekizai_tags static %}
+
+{% addtoblock 'js' %}
+    <script id="template-upload" type="text/x-tmpl">
+    {{ JQ_OPEN }} for (var i=0, file; file=o.files[i]; i++) { {{ JQ_CLOSE }}
+
+        <div class="col s12 m3 template-upload fade">
+            <div class="card small">
+                <div class="card-image preview">
+                    <div class="preloader-wrapper big active" style="width: 100%; height: 100%;">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <p class="size">Processing...</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success determinate" style="width:0%;"></div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+
+                    {{ JQ_OPEN }} if (!i && !o.options.autoUpload) { {{ JQ_CLOSE }}
+                        <button class="waves-effect waves-light btn start" disabled>
+                            <i class="material-icons right">file-upload</i>
+                            Start
+                        </button>
+                    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+
+
+                    {{ JQ_OPEN }} if (!i) { {{ JQ_CLOSE }}
+                        <button class="waves-effect waves-light btn red cancel">
+                            <i class="material-icons right">cancel</i>
+                            Cancel
+                        </button>
+                    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+                </div>
+            </div>
+        </div>
+    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+    </script>
+
+    <script id="template-download" type="text/x-tmpl">
+    {{ JQ_OPEN }} for (var i=0, file; file=o.files[i]; i++) { {{ JQ_CLOSE }}
+
+        <div class="col s12 m3 template-download fade">
+            <div class="card small">
+
+                <div class="card-image preview">
+                    {{ JQ_OPEN }} if (file.thumbnailUrl) { {{ JQ_CLOSE }}
+                        <a href="{{ JQ_OPEN }}=file.url{{ JQ_CLOSE }}"
+                         title="{{ JQ_OPEN }}=file.name{{ JQ_CLOSE }}"
+                         download="{{ JQ_OPEN }}=file.name{{ JQ_CLOSE }}"
+                         data-gallery><img src="{{ JQ_OPEN }}=file.thumbnailUrl{{ JQ_CLOSE }}"></a>
+                    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+                    <div class="card-title name">
+                         {{ JQ_OPEN }}=file.name{{ JQ_CLOSE }}
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <span class="size">{{ JQ_OPEN }}=o.formatFileSize(file.size){{ JQ_CLOSE }}</span>
+                    {{ JQ_OPEN }} if (file.error) { {{ JQ_CLOSE }}
+                        <div><span class="label label-danger">Error</span> {{ JQ_OPEN }}=file.error{{ JQ_CLOSE }}</div>
+                    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+                </div>
+
+                <div class="card-action">
+                    {{ JQ_OPEN }} if (file.deleteUrl) { {{ JQ_CLOSE }}
+                        <button class="waves-effect waves-light btn red delete"
+                                data-type="{{ JQ_OPEN }}=file.deleteType{{ JQ_CLOSE }}"
+                                data-data='{ "csrfmiddlewaretoken" : "{{ csrf_token }}" }'
+                                data-url="{{ JQ_OPEN }}=file.deleteUrl{{ JQ_CLOSE }}"
+                                {{ JQ_OPEN }} if (file.deleteWithCredentials) { %}
+                                    data-xhr-fields='{"withCredentials":true}'{% }
+                                {{ JQ_CLOSE }}>
+                            <i class="material-icons right">delete</i>
+                            Delete
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle">
+                    {{ JQ_OPEN }} } else { {{ JQ_CLOSE }}
+                        <button class="waves-effect waves-light btn red cancel">
+                            <i class="material-icons right">cancel</i>
+                            Cancel
+                        </button>
+                    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+                </div>
+
+            </div>
+            <input type="hidden" name="images[]" value="{{ JQ_OPEN }}=file.id{{ JQ_CLOSE }}"/>
+        </div>
+    {{ JQ_OPEN }} } {{ JQ_CLOSE }}
+    </script>
+{% endaddtoblock %}
+
+{% addtoblock 'js' %}
+    <script type="text/javascript" src="{% static "js/dist/bundle.file-uploader-vendors.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/dist/bundle.file-uploader-core.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/dist/bundle.file-uploader-extra.min.js" %}"></script>
+{% endaddtoblock %}
+{% addtoblock 'js' %}
+    <script type="text/javascript">
+        var formData = $('#fileupload').serializeArray();
+        formData.push(
+            { name: "csrfmiddlewaretoken", value: "{{ csrf_token }}" }
+        );
+
+        var fileupload = $("#fileupload").fileupload({
+            url: "{% url 'image_upload' %}",
+            autoUpload: true,
+            formData: formData,
+            maxNumberOfFiles: 4,
+            sequentialUploads: true,
+            dataType: 'json',
+            //fileInput: $('input:file'),
+            paramName: 'files[]',
+            uploadTemplateId: 'template-upload',
+            downloadTemplateId: 'template-download',
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator && navigator.userAgent),
+            imageMaxWidth: 1200,
+            imageMaxHeight: 800,
+            filesContainer: ".files",
+            imageCrop: true
+        });
+
+        var file_upload_el = $("#file_input_field");
+
+        $(".browse-button").bind('click', function (e) {
+            $('input:file').click();
+            e.preventDefault();
+        });
+
+    </script>
+{% endaddtoblock %}
+
+<div id="fileupload">
+    <div class="col s12 fileupload-buttonbar">
+
+        <a class="btn-floating btn-large browse-button">
+            <i class="material-icons">file_upload</i>
+
+        </a>
+        <input type="file" multiple name="files[]" accept="image/*" id="file_input_field" class="hide">
+        <div class="fileupload-progress fade">
+            <div class="progress fade">
+                <div class="progress-bar progress-bar-success determinate" style="width:0%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div role="presentation" class="col s12">
+            <div class="row files" id="files"></div>
+        </div>
+
+    <div class="preloader-wrapper big active hide">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>

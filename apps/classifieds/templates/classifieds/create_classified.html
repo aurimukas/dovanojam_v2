@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static crispy_forms_tags sekizai_tags classifiedstags %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAdQWxytU2D9qCYC0OrnwJHNdsAgc3hrlw&libraries=places" type="text/javascript">
+    </script>
+    <script src="{% static 'js/libs/gmaps.js' %}"></script>
+    <script src="{% static 'js/components/form_field_address_search.js' %}"></script>
+{% endblock js %}
+
+{% block css %}
+    {{ block.super }}
+    <style type="text/css">
+        #map {
+            width: 100%;
+            min-height: 250px;
+        }
+        .address-search .localize-me {
+            padding: 0 1rem;
+        }
+
+        .address-search .localize-me i.material-icons {
+            margin-right: 10px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <div class="col s12">
+        <form method="post" action="" id="create_classified">
+            {% csrf_token %}
+
+            {% crispy donation_form %}
+            {% crispy place_form %}
+
+            <div class="row card-panel upload-photos-form">
+                <h4>Upload Photos</h4>
+                {% file_upload %}
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn-large">Submit Form</button>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+django-cms<3.4
+django-treebeard>=4.0
+psycopg2
+https://github.com/divio/djangocms-column/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-googlemap/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-inherit/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-link/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-style/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-file/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-picture/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-teaser/archive/master.zip?1466060432.938545
+https://github.com/divio/djangocms-video/archive/master.zip?1466060432.938545
+djangocms-admin-style>=1.1.1
+djangocms-text-ckeditor>=3.0
+Django<1.10
+pytz
+django-reversion>=1.10,<1.11
+django-mptt<0.9
+django-classy-tags>=0.3.4.1
+html5lib
+Pillow>=2.3
+django-sekizai>=0.7
+six
+# For Dovanojam Module
+django-location-field>=1.6.1
+django-jfu>=2.0.9
+Redis>=2.10.5
+django-extensions>=1.6.7
+django-parler >= 1.6.4
+django-filer >= 1.1.1
+django-crispy-forms >= 1.6.0

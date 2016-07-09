@@ -1,0 +1,11 @@
+<div {% if div.css_id %}id="{{ div.css_id }}"{% endif %}
+    {% if div.css_class %}class="{{ div.css_class }}"{% endif %} {{ div.flat_attrs|safe }}>
+        {{ fields|safe }}
+</div>
+<div class="col s12 m6">
+    <div id="map" class="card">
+        <div class="progress" style="display: none;">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+</div>
